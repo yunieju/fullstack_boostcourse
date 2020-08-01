@@ -1,0 +1,56 @@
+body {
+   text-align: left;
+}
+
+ nav{
+   position: fixed;
+   top: 15px;
+   width: 100%;
+   border-bottom-color: grey;
+   border-bottom-style: solid;
+   border-bottom-width: 2px;
+   text-align: right;
+}
+
+ul {
+	margin-right: 5%;
+}
+
+nav ul li {
+  display: inline;
+  list-style: none;
+  background-color: #F7B5B5;
+  clear: both;
+  padding: 0.7em;
+  margin: 5px;
+  
+  background-color: #F7B5B5;
+  box-shadow: 2px 2px #F79090, 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  margin-left: 5%;
+  margin-right: 5px;
+  background-color: white;
+  position: relative;
+  top: 120px;
+  clear: both;
+}
+
+.meme {
+	width: 500px;
+	display: block;
+	margin-left: auto;
+  	margin-right: auto;
+  
+}
+
+footer{
+text-align: center;
+  position: relative;
+  top: 180px;
+  padding: 0.5em;
+  border-top-color: grey;
+  border-top-style: solid;
+  border-top-width: 2px;
+}
