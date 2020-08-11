@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 import kr.or.connect.jdbcexams.dto.Role;
 
@@ -57,7 +59,6 @@ public class RoleDao {
 				}
 			}
 		}
-	
 		return role;
 	}
 	
@@ -83,5 +84,73 @@ public class RoleDao {
 			ex.printStackTrace();
 		}
 		return insertCount;
+	}
+	
+	//for jdbcExam3
+	public List<Role> getRoles() {
+		List<Role> list = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String sql = "SELECT description, role_id FROM role order by role_id desc";
+		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					String description = rs.getString(1);
+					int id = rs.getInt("role_id");
+					Role role = new Role(id, description);
+					list.add(role);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
+	
+	// for jdbcExam4 - delete Role with given role id
+	public int deleteRole(Integer roleId) {
+		 int deleteCount = 0;
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+		 } catch(ClassNotFoundException e) {
+			 e.printStackTrace();
+		 }
+		 String sql = "DELETE FROM role WHERE role_id = ?";
+		 try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+					PreparedStatement ps = conn.prepareStatement(sql)) {
+			 ps.setInt(1, roleId);
+			 deleteCount = ps.executeUpdate();
+		 }catch (Exception ex) {
+			 ex.printStackTrace();
+		 }
+		 return deleteCount;
+	}
+	
+	// for jdbcExam5 - update role 
+	public int updateRole(Role role) {
+		 int updateCount = 0;
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+		 } catch(ClassNotFoundException e) {
+			 e.printStackTrace();
+		 }
+		 String sql = "UPDATE role set description = ? WHERE role_id = ?";
+		 try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+					PreparedStatement ps = conn.prepareStatement(sql)) {
+			 ps.setString(1, role.getDescription());
+			 ps.setInt(2, role.getRoleId());
+			 
+			 updateCount = ps.executeUpdate();
+		 }catch (Exception ex) {
+			 ex.printStackTrace();
+		 }
+		 return updateCount;
 	}
 }
