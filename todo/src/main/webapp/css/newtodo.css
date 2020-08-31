@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.title {
+  text-align: center;
+}
+
+#answer {
+  background-color: white;
+  position: fixed;
+  left : 250px;
+}
+
+.button_container {
+	clear: both;
+
+}
+
+.buttons {
+  background-color : #008CBA;
+  border : None;
+  width : 100px;
+  height : 35px;
+  padding: 10px;
+  color: white;
+}
+
+#goback {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  width : 100px;
+  height : 35px;
+}
+
+
